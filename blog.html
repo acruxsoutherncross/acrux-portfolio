@@ -2,237 +2,325 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ACRUX Blog</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACRUX Blog</title>
 
-  <!-- Fuentes -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=JetBrains+Mono:wght@400;700&display=swap"
-    rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
 
-  <style>
-    /* BODY y FLEX para footer sticky */
-    body {
-      margin: 0;
-      overflow-x: hidden;
-      background-color: black;
-      font-family: 'JetBrains Mono', monospace;
-      color: white;
+    <style>
+        body {
+            margin: 0;
+            overflow-x: hidden;
+            background: radial-gradient(circle at top, #1a1a1a, #0d0d0d);
+            font-family: 'JetBrains Mono', monospace;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
 
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
+        /* CONTENIDO */
+        .content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            gap: 2rem;
+            flex: 1;
+        }
 
-    /* Contenido crece y empuja el footer */
-    .content {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 2rem;
-      gap: 2rem;
-      flex: 1;
-      box-sizing: border-box;
-    }
+         /* BOTONES */
+        .buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
 
-    /* Botón back */
-    .back-btn {
-      align-self: flex-start;
-      margin-bottom: 1rem;
-      padding: 0.4rem 0.8rem;
-      background-color: #7c3aed;
-      color: white;
-      border-radius: 0.3rem;
-      text-decoration: none;
-      font-size: 0.9rem;
-      transition: background-color 0.2s ease;
-    }
+        .button {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            border-radius: 0.3rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            border: none;
+        }
 
-    .back-btn:hover {
-      background-color: #9d4edd;
-    }
+        .blog-btn {
+            background-color: transparent;
+            color: #bbbbbb;
+            border: 2px solid #bbdbbb;
+        }
 
-    img {
-      max-width: 465px;
-      width: 90%;
-      margin-top: -5rem;
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-    }
+        .blog-btn:hover {
+            border-color: #6b7280;
+        }
 
-    .blog-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 2rem;
-      max-width: 1200px;
-      width: 100%;
-    }
+        .button svg {
+            width: 16px;
+            height: 16px;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
 
-    .post-card {
-      background-color: #111;
-      border: 1px solid #333;
-      border-radius: 0.5rem;
-      width: 300px;
-      padding: 1rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.8rem;
-      transition: transform 0.2s ease, border-color 0.2s ease;
-    }
+        /* LOGO */
+        img {
+            max-width: 420px;
+            width: 90%;
+            filter: drop-shadow(0 0 20px rgba(124, 58, 237, 0.4));
+        }
 
-    .post-card:hover {
-      transform: translateY(-5px);
-      border-color: #7c3aed;
-    }
+        /* GRID */
+        .blog-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            max-width: 1100px;
+        }
 
-    .post-card h2 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1.2rem;
-      margin: 0;
-    }
+        /* CARD PRO */
+        .post-card {
+            background: rgba(20, 20, 20, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(124, 58, 237, 0.2);
+            border-radius: 0.8rem;
+            padding: 1.2rem;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
 
-    .post-card p {
-      font-size: 0.9rem;
-      color: #ccc;
-      line-height: 1.4;
-    }
+        /* Glow animado */
+        .post-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, transparent, rgba(124, 58, 237, 0.3), transparent);
+            opacity: 0;
+            transition: 0.4s;
+        }
 
-    .post-card a {
-      margin-top: auto;
-      align-self: flex-start;
-      background-color: #7c3aed;
-      color: white;
-      padding: 0.4rem 0.8rem;
-      border-radius: 0.3rem;
-      text-decoration: none;
-      font-size: 0.9rem;
-      transition: background-color 0.2s ease;
-    }
+        .post-card:hover::before {
+            opacity: 1;
+        }
 
-    .post-card a:hover {
-      background-color: #9d4edd;
-    }
+        /* Hover brutal */
+        .post-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: #7c3aed;
+            box-shadow: 0 0 25px rgba(124, 58, 237, 0.4);
+        }
 
-    /* Footer */
-    footer {
-      font-size: 0.8rem;
-      color: #555;
-      text-align: center;
-      padding: 1rem 0;
-    }
+        /* TEXTOS */
+        .post-card h2 {
+            font-family: 'Orbitron';
+            font-size: 1.2rem;
+        }
 
-    /* Canvas fondo partículas */
-    #bgCanvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      pointer-events: none;
-    }
+        .post-card p {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
 
-    /* Responsive */
-    @media(max-width: 700px) {
-      .post-card {
-        width: 90%;
-      }
-    }
-  </style>
+        /* BOTÓN CARD */
+        .post-card a {
+            margin-top: 1rem;
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            border-radius: 0.3rem;
+            background: #7c3aed;
+            text-decoration: none;
+            color: white;
+            transition: 0.3s;
+        }
+
+        .post-card a:hover {
+            box-shadow: 0 0 10px #7c3aed;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #555;
+            padding: 1rem;
+        }
+
+        /* CANVAS */
+        #bgCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+
+        /* EFECTO GLOW GLOBAL */
+        body::after {
+            content: "";
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.15), transparent 70%);
+            top: -200px;
+            left: -200px;
+            z-index: 0;
+        }
+    </style>
 </head>
 
 <body>
 
-  <!-- Canvas partículas -->
-  <canvas id="bgCanvas"></canvas>
+    <canvas id="bgCanvas"></canvas>
 
-  <div class="content">
-    <!-- Botón de volver -->
-    <a href="index.html" class="back-btn">← Back to Home</a>
+    <div class="content">
 
-    <img src="https://i.pinimg.com/originals/57/4a/4b/574a4b7be133e794edab2b0da7355ac0.gif" alt="blog GIF">
+        <img src="https://i.pinimg.com/originals/57/4a/4b/574a4b7be133e794edab2b0da7355ac0.gif">
 
-    <div class="blog-container">
-      <div class="post-card">
-        <h2>Practica de blog</h2>
-        <p>Practica de blog (ya creado bruhhh.... )</p>
-        <a href="blog/blog-1.html">Read More</a>
-      </div>
+        <div class="blog-container">
 
-      <div class="post-card">
-        <h2>Red Team Tools I Built</h2>
-        <p>A walkthrough of custom tools I developed for penetration testing and red teaming, focusing on efficiency and
-          stealth.</p>
-        <a href="#">Read More</a>
-      </div>
+            <div class="post-card">
+                <h2>Practica de blog</h2>
+                <p>Practica de blog (ya creado bruhhh....)</p>
+                <a href="#">Read More</a>
+            </div>
 
-      <div class="post-card">
-        <h2>Practical Python Exploits</h2>
-        <p>Examples of Python-based exploits and automation scripts used in testing real-world applications securely.
-        </p>
-        <a href="#">Read More</a>
-      </div>
+            <div class="post-card">
+                <h2>Red Team Tools</h2>
+                <p>Custom tools for stealth and automation.</p>
+                <a href="#">Read More</a>
+            </div>
 
-      <div class="post-card">
-        <h2>Learning Rust for Security</h2>
-        <p>Why Rust is becoming the go-to language for building fast, safe, and stealthy security tools in modern
-          environments.</p>
-        <a href="#">Read More</a>
-      </div>
+            <div class="post-card">
+                <h2>Python Exploits</h2>
+                <p>Real-world scripts and offensive techniques.</p>
+                <a href="#">Read More</a>
+            </div>
+
+            <div class="post-card">
+                <h2>Rust Security</h2>
+                <p>Fast and safe offensive tooling.</p>
+                <a href="#">Read More</a>
+            </div>
+
+        </div>
+
+        <a href="index.html" class="button blog-btn">
+            home
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+            </svg>
+        </a>
+
     </div>
-  </div>
 
-  <!-- Footer -->
-  <footer>© 2026 ACRUX | All rights reserved</footer>
+    <footer>© 2026 ACRUX | All rights reserved</footer>
 
-  <!-- JAVASCRIPT FONDO PARTÍCULAS BLANCAS -->
-  <script>
-    const canvas = document.getElementById("bgCanvas");
-    const ctx = canvas.getContext("2d");
+    <script>
+        const canvas = document.getElementById("bgCanvas");
+        const ctx = canvas.getContext("2d");
 
-    function resize() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-    resize();
-    window.addEventListener("resize", resize);
+        let particles = [];
+        const mouse = { x: null, y: null };
 
-    const particles = Array.from({ length: 160 }).map(() => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      size: Math.random() * 2 + 0.5,
-      speedY: Math.random() * 0.7 + 0.2,
-      speedX: Math.random() * 0.3 - 0.15,
-      color: "#fff"
-    }));
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resize();
+        window.addEventListener("resize", resize);
 
-    function draw() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // Mouse tracking
+        window.addEventListener("mousemove", (e) => {
+            mouse.x = e.x;
+            mouse.y = e.y;
+        });
 
-      particles.forEach(p => {
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = p.color;
-        ctx.fill();
+        // Crear partículas
+        function init() {
+            particles = [];
+            for (let i = 0; i < 210; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    vx: Math.random() * 1 - 0.5,
+                    vy: Math.random() * 1 - 0.5
+                });
+            }
+        }
 
-        p.y += p.speedY;
-        p.x += p.speedX;
+        // Dibujar líneas entre partículas
+        function connect() {
+            for (let a = 0; a < particles.length; a++) {
+                for (let b = a; b < particles.length; b++) {
+                    let dx = particles[a].x - particles[b].x;
+                    let dy = particles[a].y - particles[b].y;
+                    let dist = dx * dx + dy * dy;
 
-        if (p.y > canvas.height) p.y = -5;
-        if (p.x > canvas.width) p.x = 0;
-        if (p.x < 0) p.x = canvas.width;
-      });
+                    if (dist < 10000) {
+                        ctx.strokeStyle = "rgba(255,255,255,0.08)";
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[a].x, particles[a].y);
+                        ctx.lineTo(particles[b].x, particles[b].y);
+                        ctx.stroke();
+                    }
+                }
 
-      requestAnimationFrame(draw);
-    }
+                // Conexión con el mouse
+                let dx = particles[a].x - mouse.x;
+                let dy = particles[a].y - mouse.y;
+                let dist = dx * dx + dy * dy;
 
-    draw();
-  </script>
+                if (dist < 15000) {
+                    ctx.strokeStyle = "rgba(255,255,255,0.08)";
+                    ctx.beginPath();
+                    ctx.moveTo(particles[a].x, particles[a].y);
+                    ctx.lineTo(mouse.x, mouse.y);
+                    ctx.stroke();
+                }
+            }
+        }
+
+        // Animación
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach(p => {
+                p.x += p.vx;
+                p.y += p.vy;
+
+                // rebote
+                if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+                // dibujar punto
+                ctx.fillStyle = "#3D3D3D";
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            connect();
+            requestAnimationFrame(animate);
+        }
+
+        init();
+        animate();
+    </script>
 
 </body>
 
