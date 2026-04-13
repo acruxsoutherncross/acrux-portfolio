@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -15,7 +15,7 @@
         body {
             margin: 0;
             overflow: hidden;
-            background-color: rgb(255, 255, 255);
+            background-color: rgb(17, 17, 17);
             font-family: Arial, sans-serif;
             color: rgb(0, 0, 0);
             min-height: 100vh;
@@ -80,8 +80,8 @@
 
         .blog-btn {
             background-color: transparent;
-            color: #000000;
-            border: 2px solid #4b5563;
+            color: #bbbbbb;
+            border: 2px solid #bbdbbb;
         }
 
         .blog-btn:hover {
@@ -107,12 +107,13 @@
             justify-content: center;
             margin-top: 1rem;
             align-items: center;
-            filter: drop-shadow(0 2px 4px rgba(10, 9, 9, 0.719));
+            filter: drop-shadow(0 2px 4px rgba(170, 165, 165, 0.596));
         }
 
         h3 span {
             display: flex;
             align-items: center;
+            color: #ebebeb;
             gap: 0.2rem;
         }
 
@@ -122,9 +123,9 @@
             margin-top: 0.5rem;
             font-family: 'JetBrains Mono', monospace;
             font-size: 1rem;
-            color: #080707;
+            color: #ebebeb;
             line-height: 1.5;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.658);
+            text-shadow: 0 1px 2px rgba(167, 167, 167, 0.658);
             font-weight: 500;
         }
 
@@ -140,7 +141,7 @@
             padding: 1rem 2rem;
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.8rem;
-            color: #292626;
+            color: #666666;
             /* Gris tenue */
             text-align: center;
         }
@@ -157,7 +158,7 @@
         .icons img {
             width: 48px;
             height: 48px;
-            filter: drop-shadow(0 2px 4px rgba(10, 9, 9, 0.589));
+            filter: drop-shadow(0 2px 4px rgba(94, 93, 93, 0.589));
         }
     </style>
 </head>
@@ -174,12 +175,10 @@
 
 
         <!-- TITULO Y PERFIL -->
-        <h3 style="font-family: 'JetBrains Mono', monospace; font-weight: 400;">
-            <span style="color:#f31313;">>_</span> Pentester &nbsp;&nbsp;
-            <span style="color:#dd5100;">⛨</span> Red Team &nbsp;&nbsp;
-            <span style="color:#6932ff;">
-                <>
-            </span> Developer
+        <h3>
+            <span><b style="color:#f31313;">>_</b> Pentester</span>
+            <span><b style="color:#dd5100;">⛨</b> Red Team</span>
+            <span><b style="color:#6932ff;">&lt;&gt;</b> Developer</span>
         </h3>
 
         <!-- ICONOS -->
@@ -203,7 +202,7 @@
 
         <!-- DESCRIPCIÓN -->
         <div class="description">
-            Hi I'm Acrux 
+            Hi I'm h1guruma 
             <br></br>
             Focused on pentesting and developing tools to identify and fix security vulnerabilities. Passionate about
             building
@@ -215,7 +214,7 @@
 
         <!-- BOTONES -->
         <div class="buttons">
-            <a href="https://github.com/acruxsoutherncross" class="button projects-btn">
+            <a href="https://github.com/h1gurumalawyer" class="button projects-btn">
                 View My Projects
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path d="M5 12h14" />
@@ -239,7 +238,7 @@
                 </svg>
             </a>
         </div>
-        
+
     </div>
 
     <footer>
@@ -289,7 +288,7 @@
                     let dist = dx * dx + dy * dy;
 
                     if (dist < 10000) {
-                        ctx.strokeStyle = "rgba(0, 0, 80, 0.15)";
+                        ctx.strokeStyle = "rgba(255,255,255,0.08)";
                         ctx.lineWidth = 1;
                         ctx.beginPath();
                         ctx.moveTo(particles[a].x, particles[a].y);
@@ -304,7 +303,7 @@
                 let dist = dx * dx + dy * dy;
 
                 if (dist < 15000) {
-                    ctx.strokeStyle = "rgba(0, 0, 80, 0.15)";
+                    ctx.strokeStyle = "rgba(255,255,255,0.08)";
                     ctx.beginPath();
                     ctx.moveTo(particles[a].x, particles[a].y);
                     ctx.lineTo(mouse.x, mouse.y);
@@ -326,7 +325,7 @@
                 if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
 
                 // dibujar punto
-                ctx.fillStyle = "#4A4242";
+                ctx.fillStyle = "#3D3D3D";
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
                 ctx.fill();
