@@ -1,88 +1,153 @@
-    body {
-      margin: 0;
-      overflow-y: auto;
-      background-color: black;
-      font-family: Arial, sans-serif;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      min-height: 100vh;
-    }
+:root {
+            --bg: #050505;
+            --surface: #0a0a0a;
+            --border: rgba(124, 58, 237, 0.2);
+            --accent: #7c3aed;
+            --text-primary: #f2f2f2;
+            --text-secondary: #a0a0a0;
+            --mono: 'JetBrains Mono', monospace;
+            --sans: 'Inter', sans-serif;
+        }
 
-    #bgCanvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      pointer-events: none;
-    }
+        body {
+            margin: 0;
+            background-color: var(--bg);
+            color: var(--text-primary);
+            font-family: var(--sans);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
 
-    h3 {
-      font-family: 'Orbitron', monospace;
-      font-weight: 600;
-      font-size: 2.2rem;
-      text-align: center;
-      margin-top: 3.5rem;
-      z-index: 1;
-    }
+        #bgCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            opacity: 0.3;
+        }
 
-    img {
-      max-width: 430px;
-      width: 90%;
-      margin-top: 1rem;
-      z-index: 1;
-    }
+        /* --- CONTAINER PRINCIPAL --- */
+        .article-wrapper {
+            position: relative;
+            z-index: 10;
+            max-width: 800px;
+            width: 90%;
+            margin: 5rem 0;
+            animation: fadeIn 1s ease-out;
+        }
 
-    .description {
-      max-width: 800px;
-      margin-top: 3rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 1rem;
-      color: #cccccc;
-      line-height: 1.5;
-      padding: 0 1rem;
-      z-index: 1;
-    }
+        /* --- ENCABEZADO TÉCNICO --- */
+        .header-meta {
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-    .buttons {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      margin-top: 4rem;
-      margin-bottom: 6rem;
-      z-index: 1;
-    }
+        .header-meta::before {
+            content: "";
+            width: 30px;
+            height: 1px;
+            background: var(--accent);
+        }
 
-    .button {
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
-      padding: 0.5rem 1rem;
-      font-size: 0.875rem;
-      font-weight: 500;
-      border-radius: 0.3rem;
-      cursor: pointer;
-      text-decoration: none;
-      transition: all 0.2s ease;
-      border: 2px solid #4b5563;
-      color: white;
-    }
+        h1 {
+            font-family: var(--mono);
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            margin: 0 0 2rem 0;
+            line-height: 1.1;
+            font-weight: 700;
+            color: #fff;
+        }
 
-    .button:hover {
-      border-color: #6b7280;
-    }
+        /* --- MEDIA / GIF --- */
+        .media-box {
+            position: relative;
+            border: 1px solid var(--border);
+            padding: 5px;
+            background: var(--surface);
+            margin-bottom: 3rem;
+        }
 
-    footer {
-      margin-top: auto;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
-      color: #555;
-      text-align: center;
-      z-index: 1;
-      width: 100%;
-      padding: 1rem 0;
-    }
+        .media-box img {
+            width: 100%;
+            display: block;
+            filter: grayscale(0.5) contrast(1.1);
+            transition: 0.5s;
+        }
+
+        .media-box:hover img {
+            filter: grayscale(0) contrast(1);
+        }
+
+        /* --- CUERPO DEL BLOG (LA CHICHA) --- */
+        .description {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            text-align: justify;
+        }
+
+        /* Bloque destacado para conceptos clave */
+        .insight-block {
+            border-left: 2px solid var(--accent);
+            background: rgba(124, 58, 237, 0.03);
+            padding: 1.5rem 2rem;
+            margin: 2.5rem 0;
+            font-family: var(--mono);
+            font-size: 0.95rem;
+            color: var(--text-primary);
+        }
+
+        /* --- BOTONES --- */
+        .action-area {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-back {
+            font-family: var(--mono);
+            text-decoration: none;
+            color: var(--text-primary);
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.3s;
+        }
+
+        .btn-back:hover {
+            color: var(--accent);
+            transform: translateX(-5px);
+        }
+
+        /* --- ANIMACIONES --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 2rem;
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            color: #333;
+        }
+
+        /* --- CUSTOM SCROLLBAR --- */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
